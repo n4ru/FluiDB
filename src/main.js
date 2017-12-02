@@ -8,12 +8,12 @@ var fs = require('fs');
 var databaseObj = {};
 
 
-databaseObj.save = (database) => {
+databaseObj._save = (database) => {
     return new Promise((res, rej) => {
-        if (!name && !database)
+        if (!databaseObj._name && !database)
             rej("No database specified.");
-        if (name && !database)
-            database = name;
+        if (databaseObj._name && !database)
+            database = databaseObj._name;
         fs.writeFile(database + '.json', JSON.stringify(databaseObj), (err) => {
             if (err)
                 rej(err);
@@ -23,11 +23,11 @@ databaseObj.save = (database) => {
     });
 };
 
-databaseObj.use = (database, callback) => {
+databaseObj._use = (database, callback) => {
     return new Promise((res, rej) => {
         if (!database)
             rej("No database specified.")
-        name = database;
+        databaseObj._name = database;
         if (fs.existsSync(database + '.json')) {
             fs.readFile(database + '.json', 'utf-8', (err, data) => {
                 console.log('reading file')
