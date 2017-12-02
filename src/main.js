@@ -5,17 +5,16 @@ jData by n4ru
 */
 
 var fs = require('fs');
-var db = {};
+var databaseObj = {};
 
-db.name = null;
 
-db.save = (database) => {
+databaseObj.save = (database) => {
     return new Promise((res, rej) => {
-        if (!db.name && !database)
+        if (!name && !database)
             rej("No database specified.");
-        if (database)
-            db.name = database;
-        fs.writeFile(database + '.json', JSON.stringify(db), (err) => {
+        if (name && !database)
+            database = name;
+        fs.writeFile(database + '.json', JSON.stringify(databaseObj), (err) => {
             if (err)
                 rej(err);
             else
@@ -24,15 +23,20 @@ db.save = (database) => {
     });
 };
 
-db.use = (database, callback) => {
+databaseObj.use = (database, callback) => {
     return new Promise((res, rej) => {
         if (!database)
             rej("No database specified.")
-        db.name = database;
+        name = database;
         if (fs.existsSync(database + '.json')) {
-            res();
+            fs.readFile(database + '.json', 'utf-8', (err, data) => {
+                console.log('reading file')
+                Object.assign(databaseObj, JSON.parse(data))
+                if (err) throw err;
+                res();
+            });
         } else {
-            fs.writeFile(database + '.json', JSON.stringify(db), (err) => {
+            fs.writeFile(database + '.json', JSON.stringify(databaseObj), (err) => {
                 if (err)
                     rej(err);
                 else
@@ -42,8 +46,13 @@ db.use = (database, callback) => {
     });
 }
 
-db.write = function(config, callback) {};
+const handler = {
+    set(target, key, value) {
+        target[key] = value;
+        databaseObj.save();
+    },
+};
 
-db.read = function(config, callback) {};
+var db = new Proxy(databaseObj, handler);
 
 module.exports = db;
