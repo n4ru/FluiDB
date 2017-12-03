@@ -1,29 +1,35 @@
 {
-  "name": "jdata",
-  "version": "0.0.1",
-  "description": "Light-weight async JSON database with low dependency overhead.",
-  "main": "main.js",
-  "scripts": {
-    "start": "node main.js"
-  },
-  "dependencies": {
-    "fs": "*"
-  },
-  "engines": {
-    "node": "4.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/n4ru/jData"
-  },
-  "keywords": [
-    "node",
-    "json",
-    "database"
-  ],
-  "author": "George Kushnir",
-  "contributors": [
-    "George Kushnir <admin@n4ru.it> (https://n4ru.it)"
-  ],
-  "license": "MIT"
+    "name": "jdata-json-db",
+    "version": "0.0.7",
+    "description": "Light-weight async JSON database with low dependency overhead.",
+    "files": [
+        "index.js"
+    ],
+    "dependencies": {
+        "fs": "*"
+    },
+    "engines": {
+        "node": "4.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/n4ru/jData.git"
+    },
+    "keywords": [
+        "node",
+        "json",
+        "database"
+    ],
+    "author": "George Kushnir",
+    "contributors": [
+        "George Kushnir <admin@n4ru.it> (https://n4ru.it)"
+    ],
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/n4ru/jData/issues"
+    },
+    "homepage": "https://github.com/n4ru/jData#readme",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    }
 }

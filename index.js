@@ -6,14 +6,15 @@ jData by n4ru
 
 var fs = require('fs');
 var databaseObj = {};
+var _name = null;
 
 
 databaseObj._save = (database) => {
     return new Promise((res, rej) => {
-        if (!databaseObj._name && !database)
+        if (!_name && !database)
             rej("No database specified.");
-        if (databaseObj._name && !database)
-            database = databaseObj._name;
+        if (_name && !database)
+            database = _name;
         fs.writeFile(database + '.json', JSON.stringify(databaseObj), (err) => {
             if (err)
                 rej(err);
@@ -23,11 +24,11 @@ databaseObj._save = (database) => {
     });
 };
 
-databaseObj._use = (database, callback) => {
+databaseObj._use = (database) => {
     return new Promise((res, rej) => {
         if (!database)
             rej("No database specified.")
-        databaseObj._name = database;
+        _name = database;
         if (fs.existsSync(database + '.json')) {
             fs.readFile(database + '.json', 'utf-8', (err, data) => {
                 console.log('reading file')
@@ -49,7 +50,7 @@ databaseObj._use = (database, callback) => {
 const handler = {
     set(target, key, value) {
         target[key] = value;
-        databaseObj.save();
+        databaseObj._save();
     },
 };
 
