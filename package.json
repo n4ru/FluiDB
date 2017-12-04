@@ -1,6 +1,6 @@
 {
     "name": "fluidb",
-    "version": "0.1",
+    "version": "0.1.0",
     "description": "JSON objects as an invisible flat file database with low overhead.",
     "files": [
         "index.js"
@@ -13,7 +13,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/n4ru/jData.git"
+        "url": "git+https://github.com/n4ru/FluiDB.git"
     },
     "keywords": [
         "node",
@@ -26,10 +26,7 @@
     ],
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/n4ru/jData/issues"
+        "url": "https://github.com/n4ru/FluiDB/issues"
     },
-    "homepage": "https://github.com/n4ru/jData#readme",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    }
+    "homepage": "https://github.com/n4ru/FluiDB#readme"
 }
