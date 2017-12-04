@@ -1,7 +1,7 @@
 {
-    "name": "jdata-json-db",
-    "version": "0.0.7",
-    "description": "Light-weight async JSON database with low dependency overhead.",
+    "name": "fluidb",
+    "version": "0.1",
+    "description": "JSON objects as an invisible flat file database with low overhead.",
     "files": [
         "index.js"
     ],

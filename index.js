@@ -2,23 +2,16 @@ const fs = require('fs');
 
 class database {
     constructor(database, object) {
-        this.name = database;
-        if (object) {
-            this.db = object;
-            fs.writeFileSync(this.name, JSON.stringify(object));
-        } else {
-            if (fs.existsSync(database)) {
-                this.db = JSON.parse(fs.readFileSync(this.name, 'utf-8'));
-            } else {
-                this.db = {};
-            }
-        }
+        typeof database === "object" && (object = database);
+        this.file = (typeof database === "string" ? database : 'db') + '.json';
+        object && fs.writeFileSync(this.file, JSON.stringify(object));
+        this.db = fs.existsSync(this.file) ? JSON.parse(fs.readFileSync(this.file, 'utf-8')) : {};
         return new Proxy(this.db, this);
     }
 
     set(target, key, value) {
         this.db[key] = value;
-        fs.writeFileSync(this.name, JSON.stringify(this.db));
+        fs.writeFileSync(this.file, JSON.stringify(this.db));
     }
 
 }

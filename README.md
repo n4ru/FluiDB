@@ -1,2 +1,2 @@
-# jData
-Light-weight async JSON database with low dependency overhead.
+# FluiDB
+JSON objects as an invisible flat file database with low overhead.
