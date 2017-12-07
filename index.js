@@ -12,6 +12,12 @@ class database {
     set(target, key, value) {
         this.db[key] = value;
         fs.writeFileSync(this.file, JSON.stringify(this.db));
+        return this.db[key]
+    }
+
+    get(target, key, value) {
+        fs.writeFileSync(this.file, JSON.stringify(this.db));
+        return this.db[key];
     }
 
 }
