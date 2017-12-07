@@ -1,6 +1,6 @@
 {
     "name": "fluidb",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "JSON objects as an invisible flat file database with low overhead.",
     "files": [
         "index.js"
