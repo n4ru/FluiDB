@@ -6,20 +6,31 @@ class database {
         this.file = (typeof database === "string" ? database : 'db') + '.json';
         object && fs.writeFileSync(this.file, JSON.stringify(object));
         this.db = fs.existsSync(this.file) ? JSON.parse(fs.readFileSync(this.file, 'utf-8')) : {};
-        return new Proxy(this.db, this);
+        return this.proxy(this.db);
     }
 
-    set(target, key, value) {
-        this.db[key] = value;
-        fs.writeFile(this.file, JSON.stringify(this.db, null, 4), () => {});
-        return this.db[key]
+    proxy(obj) {
+        const _nref = this
+        return new Proxy(obj, {
+            get: function(target, k) {
+                if (_nref.isObject(target[k])) return _nref.proxy(target[k])
+                return target[k]
+            },
+            set: function(target, k, v) {
+                target[k] = v
+                _nref.dump();
+                return target[k]
+            }
+        });
     }
 
-    get(target, key, value) {
-        fs.writeFile(this.file, JSON.stringify(this.db, null, 4), () => {});
-        return this.db[key];
+    isObject(v) {
+        return typeof v === 'object'
     }
 
+    dump() {
+        fs.writeFileSync(this.file, JSON.stringify(this.db, null, 4), () => {});
+    }
 }
 
 module.exports = database;
