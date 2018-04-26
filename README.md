@@ -21,11 +21,10 @@ fs.writeFileSync("./db.json", JSON.stringify(jsonObj));
 
 In the example above, we have to require fs, init our object from scratch or from an existing file, then after updating our object, we have to manually dump it back to the file. Anytime we change or add a property to the object, we need to remember to dump it.
 
-With fluiDB, all we have to do is initialize our object after a single require, and we're good to go.
+With fluiDB, all we have to do is initialize our object, and we're good to go.
 
 ```
-const db = require('fluidb'),
-jsonObj = new db();
+const jsonObj = new require('fluidb')();
 
 jsonObj[someKey] = someValue;
 ```
