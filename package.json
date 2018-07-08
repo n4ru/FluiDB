@@ -6,7 +6,8 @@
         "index.js"
     ],
     "dependencies": {
-        "fs": "*"
+        "fs": "*",
+        "mocha": "^5.2.0"
     },
     "engines": {
         "node": ">=6.0.0"
@@ -27,6 +28,9 @@
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/n4ru/FluiDB/issues"
+    },
+    "scripts": {
+        "test": "mocha"
     },
     "homepage": "https://github.com/n4ru/FluiDB#readme"
 }
