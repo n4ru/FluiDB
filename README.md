@@ -41,7 +41,7 @@ Due to the lack of support for destructors, do *not* clear or reinitialize your 
 
 ## Security
 
-If you discover a security vulnerability within this package, please send an e-mail to hello@brianfaust.me. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within this package, please send an e-mail to admin@n4ru.it. All security vulnerabilities will be promptly addressed.
 
 ## Credits
 
