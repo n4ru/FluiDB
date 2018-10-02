@@ -46,7 +46,7 @@ If you discover a security vulnerability within this package, please send an e-m
 ## Credits
 
 - [George Kushnir](https://github.com/n4ru)
-- [All Contributors](../../../../contributors)
+- [Brian Faust](https://github.com/faustbrian)
 
 ## License
 
