@@ -1,0 +1,29 @@
+language: node_js
+
+node_js:
+    - node
+    - 9
+
+stages:
+    - lint
+    - test
+
+script:
+    - yarn test:coverage --ci
+    - codecov
+
+jobs:
+    include:
+        -
+            stage: lint
+            script: yarn lint
+        -
+            stage: lint
+            node_js: 9
+            script: yarn lint
+
+cache:
+    yarn: true
+
+git:
+    depth: 1
