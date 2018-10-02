@@ -1,5 +1,6 @@
 # FluiDB
-JSON objects as an invisible flat file database with low overhead.
+
+> JSON objects as an invisible flat file database with low overhead.
 
 ### Installation
 
@@ -37,3 +38,16 @@ fluidb takes two arguments -- the database name, and an object you want to initi
 
 ##### Clearing Objects
 Due to the lack of support for destructors, do *not* clear or reinitialize your object using `jsonObj = {}` -- instead, use `jsonObj = new db({})` or `jsonObj = new db('someName', {})`. 
+
+## Security
+
+If you discover a security vulnerability within this package, please send an e-mail to admin@n4ru.it. All security vulnerabilities will be promptly addressed.
+
+## Credits
+
+- [George Kushnir](https://github.com/n4ru)
+- [All Contributors](../../../../contributors)
+
+## License
+
+[MIT](LICENSE) © [George Kushnir](https://n4ru.it)

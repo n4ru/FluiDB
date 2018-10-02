@@ -1,0 +1,9 @@
+*.log
+*.sqlite
+.coverage
+.DS_Store
+.npm
+.vscode
+logs
+node_modules
+npm-debug.log*
