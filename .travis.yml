@@ -12,16 +12,6 @@ script:
     - yarn test:coverage --ci
     - codecov
 
-jobs:
-    include:
-        -
-            stage: lint
-            script: yarn lint
-        -
-            stage: lint
-            node_js: 9
-            script: yarn lint
-
 cache:
     yarn: true
 
