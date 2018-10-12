@@ -3,19 +3,18 @@ const os = require('os')
 const path = require('path')
 const TestSubject = require('../lib')
 
-const databaseFile = path.resolve(os.homedir(), 'fluidb.json')
-const readDatabase = () => JSON.parse(fs.readFileSync(databaseFile, 'utf-8'))
+const readDatabase = () => JSON.parse(fs.readFileSync(path.resolve(__dirname, 'db.json'), 'utf-8'))
 
 beforeEach(() => {
 	try {
-		fs.unlinkSync(databaseFile)
+		fs.unlinkSync('__tests__\\db.json')
 	} catch (e) {
 		//
 	}
 })
 
 it('should match sample values', () => {
-	const database = new TestSubject()
+	const database = new TestSubject('..\\__tests__\\db')
 	database['test'] = { 'key': 'value' }
 
 	expect(database).toEqual(readDatabase())
@@ -29,7 +28,7 @@ it('should be instantiated with the passed object', () => {
 })
 
 it('should dump if deleted', () => {
-	const database = new TestSubject()
+	const database = new TestSubject('..\\__tests__\\db')
 	database['test'] = 'value'
 
 	expect(database).toEqual(readDatabase())
@@ -40,7 +39,7 @@ it('should dump if deleted', () => {
 })
 
 it('should store arrays and sub-arrays', () => {
-	const database = new TestSubject()
+	const database = new TestSubject('..\\__tests__\\db')
 	database['test'] = [0, 1, 2, 3, 4]
 	database['testtwo'] = [
 		[0, 1, 2],
@@ -52,7 +51,7 @@ it('should store arrays and sub-arrays', () => {
 })
 
 it('should store objects and sub-objects', () => {
-	const database = new TestSubject()
+	const database = new TestSubject('..\\__tests__\\db')
 	database['test'] = {
 		'test': {
 			'test': 'yes'
@@ -64,14 +63,14 @@ it('should store objects and sub-objects', () => {
 })
 
 it('should allow multiple databases', () => {
-	const database1 = new TestSubject('fluidb1.json')
+	const database1 = new TestSubject('..\\__tests__\\fluidb1')
 	database1['test'] = 'some value for instance 1'
 
-	const database2 = new TestSubject('fluidb2.json')
+	const database2 = new TestSubject('..\\__tests__\\fluidb2')
 	database2['test'] = 'some value for instance 2'
 
 	expect(database1).not.toEqual(database2)
 
-	fs.unlinkSync('fluidb1.json')
-	fs.unlinkSync('fluidb2.json')
+	fs.unlinkSync('__tests__\\fluidb1.json')
+	fs.unlinkSync('__tests__\\fluidb2.json')
 })
