@@ -7,7 +7,8 @@ const readDatabase = () => JSON.parse(fs.readFileSync(path.resolve(__dirname, 'd
 
 beforeEach(() => {
 	try {
-		fs.unlinkSync('__tests__\\db.json')
+		fs.unlinkSync(path.resolve('db.json'))
+		fs.unlinkSync(path.resolve('..\\__tests__\\db.json'))
 	} catch (e) {
 		//
 	}
@@ -22,7 +23,7 @@ it('should match sample values', () => {
 
 it('should be instantiated with the passed object', () => {
 	const object = { 'key': 'value' }
-	const database = new TestSubject(object)
+	const database = new TestSubject('..\\__tests__\\db', object)
 
 	expect(database).toEqual(object)
 })
