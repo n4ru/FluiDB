@@ -74,3 +74,16 @@ it('should allow multiple databases', () => {
 	fs.unlinkSync('fluidb1.json')
 	fs.unlinkSync('fluidb2.json')
 })
+
+it('should pop properly', () => {
+	const database1 = new TestSubject('fluidb1')
+	database1['test'] = [1, 2, 3, 4]
+	expect(database1['test'].pop()).toEqual(4);
+})
+
+it('should splice properly', () => {
+	const database1 = new TestSubject('fluidb1')
+	database1['test'] = [1, 2, 3, 4]
+	database1['test'].splice(0, 1, 5);
+	expect(database1['test']).toEqual([5, 2, 3, 4]);
+});
