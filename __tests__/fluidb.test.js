@@ -76,14 +76,21 @@ it('should allow multiple databases', () => {
 })
 
 it('should pop properly', () => {
-	const database1 = new TestSubject('fluidb1')
+	const database1 = new TestSubject()
 	database1['test'] = [1, 2, 3, 4]
-	expect(database1['test'].pop()).toEqual(4);
+	database1['test'].pop()
+
+	expect({ 'test': [1, 2, 3] }).toEqual(readDatabase());
+
+	fs.unlinkSync('db.json')
 })
 
 it('should splice properly', () => {
-	const database1 = new TestSubject('fluidb1')
+	const database1 = new TestSubject()
 	database1['test'] = [1, 2, 3, 4]
 	database1['test'].splice(0, 1, 5);
-	expect(database1['test']).toEqual([5, 2, 3, 4]);
+
+	expect({ 'test': [5, 2, 3, 4] }).toEqual(readDatabase());
+
+	fs.unlinkSync('db.json')
 });
