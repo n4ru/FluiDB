@@ -39,6 +39,12 @@ fluidb takes two arguments -- the database name, and an object you want to initi
 ##### Clearing Objects
 Due to the lack of support for destructors, do *not* clear or reinitialize your object using `jsonObj = {}` -- instead, use `jsonObj = new db({})` or `jsonObj = new db('someName', {})`. 
 
+##### BigInt Support
+Starting from `0.3.0`, native big integers are supported through both the native `BigInt` function and integer literals followed by `n`. Please be aware that these are stored as strings in the form `"123n"` because the JSON spec does not support it, and all strings in such format will be parsed as native big integers.
+
+##### Read Only mode
+If you pass in `true` as your last argument (in any position), you will get a read-only object that does not dump changes to disk. This is mostly useful for parsing saved JSON with native BigInts stored by fluidb that you don't need to make changes to.
+
 ## Security
 
 If you discover a security vulnerability within this package, please send an e-mail to admin@n4ru.it. All security vulnerabilities will be promptly addressed.
