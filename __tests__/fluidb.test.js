@@ -3,7 +3,7 @@ const os = require('os')
 const path = require('path')
 const TestSubject = require('../lib')
 
-const readDatabase = () => JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'db.json'), 'utf-8'))
+const readDatabase = () => new TestSubject(JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'db.json'), 'utf-8')), true);
 
 beforeEach(() => {
 	try {
@@ -18,6 +18,8 @@ it('should match sample values', () => {
 	database['test'] = { 'key': 'value' }
 
 	expect(database).toEqual(readDatabase())
+	
+	fs.unlinkSync('db.json')
 })
 
 it('should be instantiated with the passed object', () => {
@@ -25,6 +27,8 @@ it('should be instantiated with the passed object', () => {
 	const database = new TestSubject(object)
 
 	expect(database).toEqual(object)
+	
+	fs.unlinkSync('db.json')
 })
 
 it('should dump if deleted', () => {
@@ -36,6 +40,8 @@ it('should dump if deleted', () => {
 	delete database['test']
 
 	expect(database).toEqual(readDatabase())
+	
+	fs.unlinkSync('db.json')
 })
 
 it('should store arrays and sub-arrays', () => {
@@ -48,6 +54,8 @@ it('should store arrays and sub-arrays', () => {
 	]
 
 	expect(database).toEqual(readDatabase())
+	
+	fs.unlinkSync('db.json')
 })
 
 it('should store objects and sub-objects', () => {
@@ -60,6 +68,8 @@ it('should store objects and sub-objects', () => {
 	database['val'] = 'someValue'
 
 	expect(database).toEqual(readDatabase())
+	
+	fs.unlinkSync('db.json')
 })
 
 it('should allow multiple databases', () => {
@@ -94,3 +104,32 @@ it('should splice properly', () => {
 
 	fs.unlinkSync('db.json')
 });
+
+it('should handle bigints', () => {
+	const database1 = new TestSubject()
+	database1['test'] = BigInt(1);
+
+	expect({ 'test': BigInt(1) }).toEqual(readDatabase());
+
+	fs.unlinkSync('db.json')
+})
+
+it('should handle bigint literals', () => {
+	const database1 = new TestSubject()
+	database1['test'] = 1n;
+
+	expect({ 'test': 1n }).toEqual(readDatabase());
+
+	fs.unlinkSync('db.json')
+})
+
+it('should not save in readonly mode', () => {
+	(new TestSubject())['test'] = 1n;
+
+	const readOnly = new TestSubject(true);
+	readOnly['test'] = 2n;
+
+	expect(readOnly['test']).not.toEqual((new TestSubject())['test']);
+
+	fs.unlinkSync('db.json')
+})
